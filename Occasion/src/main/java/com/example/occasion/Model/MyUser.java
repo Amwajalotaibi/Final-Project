@@ -30,8 +30,16 @@ public class MyUser implements UserDetails {
     private String password;
 
     @NotEmpty(message = "role can't be empty")
-    @Column(columnDefinition = "varchar(20) not null check(role ='customer' or role='admin' or role='company')")
+    @Column(columnDefinition = "varchar(20) not null check(role ='customer' or role='company')")
     private String role;
+
+    @OneToOne(cascade =CascadeType.ALL,mappedBy = "myuser")
+    @PrimaryKeyJoinColumn
+    private Company company;
+
+    @OneToOne(cascade =CascadeType.ALL,mappedBy = "myuser")
+    @PrimaryKeyJoinColumn
+    private Customer customer;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

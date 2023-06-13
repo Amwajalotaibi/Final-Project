@@ -17,10 +17,9 @@ public class AuthService {
         return authRepository.findAll();
     }
 
-
     public void register(MyUser myUser){
-        String hash=new BCryptPasswordEncoder().encode(myUser.getPassword()); // هذي عشان يشفر لي الباس
-        myUser.setPassword(hash);// نخزن في الداتا بيس الباس بعد التشفير
+        String hash=new BCryptPasswordEncoder().encode(myUser.getPassword());
+        myUser.setPassword(hash);
         myUser.setRole("USER");
         authRepository.save(myUser);
     }

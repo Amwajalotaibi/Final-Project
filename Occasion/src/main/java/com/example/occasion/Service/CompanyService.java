@@ -32,7 +32,6 @@ public class CompanyService {
         companyRepository.save(oldCompany);
     }
 
-
     public void deleteCompany(Integer id){
         Company company=companyRepository.findCompanyById(id);
         if(company==null){

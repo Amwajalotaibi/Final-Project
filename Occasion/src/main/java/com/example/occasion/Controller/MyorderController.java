@@ -1,15 +1,13 @@
 package com.example.occasion.Controller;
 
-import com.example.occasion.Model.MyUser;
 import com.example.occasion.Model.Myorder;
 import com.example.occasion.Service.MyorderService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/myorder")
 @RequiredArgsConstructor
@@ -17,10 +15,10 @@ public class MyorderController {
     private final MyorderService myorderService;
 
     @GetMapping("/get")
-    public ResponseEntity getMyorder(@AuthenticationPrincipal MyUser myUser) {
-        List<Myorder> myorderList=myorderService.getAllMyorder(myUser);
-        return ResponseEntity.status(200).body(myorderList);
+    public ResponseEntity getAll(){
+        return ResponseEntity.status(200).body(myorderService.getAll());
     }
+
 
     @PostMapping("/add")
     public ResponseEntity addMyorder(@Valid @RequestBody Myorder myorder){
@@ -40,6 +38,14 @@ public class MyorderController {
         return ResponseEntity.status(200).body("Order deleted");
 
     }
+
+
+
+
+
+
+
+
 
 
 //    @DeleteMapping("/delete/{myorderId}")
@@ -65,5 +71,11 @@ public class MyorderController {
 //    public ResponseEntity addMyorder(@AuthenticationPrincipal MyUser myUser, @RequestBody Myorder myorder, @RequestBody Integer productId , @RequestBody Integer userId){
 //        myorderService.addMyorder(productId, userId, myorder);
 //        return ResponseEntity.status(200).body("My Order Added");
+//    }
+
+//    @GetMapping("/get")
+//    public ResponseEntity getMyorder(@AuthenticationPrincipal MyUser myUser) {
+//        List<Myorder> myorderList=myorderService.getAllMyorder(myUser);
+//        return ResponseEntity.status(200).body(myorderList);
 //    }
 }

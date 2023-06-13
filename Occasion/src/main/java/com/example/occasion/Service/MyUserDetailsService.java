@@ -14,12 +14,12 @@ public class MyUserDetailsService implements UserDetailsService {
     private final AuthRepository authRepository;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        MyUser myUser=authRepository.findMyUserByUsername(username); //الفايند ما يتغير بس اللي بين الاقواس نحط فيه الايميل
+        MyUser myUser=authRepository.findMyUserByUsername(username);
 
-        if(username==null){ // لو هو مو موجود نرمني لها ثرو
+        if(username==null){
             throw new UsernameNotFoundException("Wrong username or password");
         }
-        return myUser; // اذا موجوده ترجعه لي
+        return myUser;
     }
 
 }

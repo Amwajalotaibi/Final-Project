@@ -2,6 +2,7 @@ package com.example.occasion.Service;
 
 import com.example.occasion.ApiException.ApiException;
 import com.example.occasion.Model.Company;
+import com.example.occasion.Model.Customer;
 import com.example.occasion.Model.MyUser;
 import com.example.occasion.Model.Myorder;
 import com.example.occasion.Repostiroy.AuthRepository;
@@ -15,11 +16,12 @@ import java.util.List;
 public class MyorderService {
 
     private final MyorderRepository myorderRepository;
-    private final AuthRepository authRepository;
-    public List<Myorder> getAllMyorder(MyUser myUser){
 
-        return myorderRepository.findMyorderByMyUser(myUser);
+    public List<Myorder> getAll(){
+
+        return myorderRepository.findAll();
     }
+
 
     public void addMyorder(Myorder myorder){
 
@@ -33,9 +35,6 @@ public class MyorderService {
             throw new ApiException("Order not found");
         }
 
-        oldMyorder.setStatus(myorder.getStatus());
-        oldMyorder.setQuantity(myorder.getQuantity());
-        oldMyorder.setDateReceived(myorder.getDateReceived());
         oldMyorder.setTotalPrice(myorder.getTotalPrice());
 
         myorderRepository.save(oldMyorder);
@@ -94,6 +93,11 @@ public class MyorderService {
 //
 //        myorderRepository.save(myorder);
 //
+//    }
+
+//    public List<Myorder> getAllMyorder(MyUser myUser){
+//
+//        return myorderRepository.findMyorderByMyUser(myUser);
 //    }
 
 
