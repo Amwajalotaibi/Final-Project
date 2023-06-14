@@ -36,28 +36,26 @@ public class Myorder {
 
 
     @ManyToOne
-    @JoinColumn(name = "customer",referencedColumnName = "id")
+    @JoinColumn(name = "customer_id")
     @JsonIgnore
     private Customer customer;
 
 
     @ManyToOne
-    @JoinColumn(name = "company",referencedColumnName = "id")
+    @JoinColumn(name = "company_id")
     @JsonIgnore
     private Company company;
 
 
     @ManyToOne
-    @JoinColumn(name = "myservice",referencedColumnName = "id")
+    @JoinColumn(name = "myService_id")
     @JsonIgnore
     private MyService myService;
 
 
-    @OneToOne(cascade =CascadeType.ALL,mappedBy = "myorder")
+    @OneToOne(cascade =CascadeType.ALL,mappedBy = "myOrder")
     @PrimaryKeyJoinColumn
     private Rating rating;
-
-
 
 
 }

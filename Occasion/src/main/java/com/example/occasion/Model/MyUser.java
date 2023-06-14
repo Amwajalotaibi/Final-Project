@@ -33,11 +33,11 @@ public class MyUser implements UserDetails {
     @Column(columnDefinition = "varchar(20) not null check(role ='customer' or role='company')")
     private String role;
 
-    @OneToOne(cascade =CascadeType.ALL,mappedBy = "myuser")
+    @OneToOne(cascade =CascadeType.ALL,mappedBy = "myUser")
     @PrimaryKeyJoinColumn
     private Company company;
 
-    @OneToOne(cascade =CascadeType.ALL,mappedBy = "myuser")
+    @OneToOne(cascade =CascadeType.ALL,mappedBy = "myUser")
     @PrimaryKeyJoinColumn
     private Customer customer;
 

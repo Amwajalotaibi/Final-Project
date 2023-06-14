@@ -1,5 +1,6 @@
 package com.example.occasion.Controller;
 
+import com.example.occasion.DTO.CompanyDTo;
 import com.example.occasion.Model.Company;
 import com.example.occasion.Service.CompanyService;
 import jakarta.validation.Valid;
@@ -21,14 +22,14 @@ public class CompanyController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity addCompany(@Valid @RequestBody Company company){
-        companyService.addCompany(company);
+    public ResponseEntity addCompanyDto(@Valid @RequestBody CompanyDTo companyDTo){
+        companyService.addCompany(companyDTo);
         return ResponseEntity.status(200).body("Company added");
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity updateCompany(@Valid @RequestBody Company company, @PathVariable Integer id){
-        companyService.updateCompany(company,id);
+    public ResponseEntity updateCompany(@Valid @RequestBody CompanyDTo companyDTo){
+        companyService.updateCompany(companyDTo);
         return ResponseEntity.status(200).body("Company Updated");
     }
 

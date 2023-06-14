@@ -27,16 +27,17 @@ public class MyService {
 
 
     @ManyToOne
-    @JoinColumn(name = "myorder",referencedColumnName = "id")
+    @JoinColumn(name = "myOrder_id")
     @JsonIgnore
     private Myorder myorder;
 
 
-    @ManyToMany(mappedBy = "myServiceSet")
+    @ManyToMany (mappedBy = "myServiceSet")
+    @JsonIgnore
     private Set<Company> companySet;
 
 
-    @OneToOne(cascade =CascadeType.ALL,mappedBy = "myservice")
+    @OneToOne(cascade =CascadeType.ALL,mappedBy = "myService")
     @PrimaryKeyJoinColumn
     private Servicetype servicetype;
 }

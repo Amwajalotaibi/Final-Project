@@ -3,15 +3,16 @@ package com.example.occasion.Model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
 
 import java.util.Set;
 
 
 @Entity
 @Data
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Company {
@@ -37,6 +38,10 @@ public class Company {
     @Column(columnDefinition = "varchar(20) not null")
     private String city;
 
+
+    @NotNull
+    private Integer Price;
+
     @OneToOne
     @MapsId
     @JsonIgnore
@@ -50,7 +55,9 @@ public class Company {
 
     @ManyToMany
     @JsonIgnore
-//    @JoinColumn(name = "company_id",referencedColumnName = "id")
+    @JoinColumn(name = "company_id")
     private Set<MyService> myServiceSet;
+ }
 
-}
+
+

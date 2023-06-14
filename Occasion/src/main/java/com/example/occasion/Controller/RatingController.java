@@ -1,5 +1,6 @@
 package com.example.occasion.Controller;
 
+import com.example.occasion.DTO.RatingDTO;
 import com.example.occasion.Model.Rating;
 import com.example.occasion.Service.RatingService;
 import jakarta.validation.Valid;
@@ -20,14 +21,14 @@ public class RatingController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity addRating(@Valid @RequestBody Rating rating){
-        ratingService.addRating(rating);
+    public ResponseEntity addRating(@Valid @RequestBody RatingDTO ratingDTO){
+        ratingService.addRating(ratingDTO);
         return ResponseEntity.status(200).body("Rating added");
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity updateRating(@PathVariable Integer id, @Valid @RequestBody Rating rating){
-        ratingService.updateRating(id, rating);
+    public ResponseEntity updateRating(@Valid @RequestBody RatingDTO ratingDTO){
+        ratingService.updateRating(ratingDTO);
         return ResponseEntity.status(200).body("Rating updated");
     }
 
@@ -36,4 +37,5 @@ public class RatingController {
         ratingService.deleteRating(id);
         return ResponseEntity.status(200).body("Rating deleted");
     }
+
 }

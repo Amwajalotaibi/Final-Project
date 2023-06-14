@@ -1,5 +1,7 @@
 package com.example.occasion.Controller;
 
+import com.example.occasion.DTO.CompanyDTo;
+import com.example.occasion.DTO.CustomerDTO;
 import com.example.occasion.Model.Customer;
 import com.example.occasion.Service.CustomerService;
 import jakarta.validation.Valid;
@@ -19,23 +21,24 @@ public class CustomerController {
         return ResponseEntity.status(200).body(customerService.getAll());
     }
 
+
     @PostMapping("/add")
-    public ResponseEntity addCustomer(@Valid @RequestBody Customer customer){
-        customerService.addCustomer(customer);
-        return ResponseEntity.status(200).body("Customer added");
+    public ResponseEntity addCustomerDto(@Valid @RequestBody CustomerDTO customerDTO){
+        customerService.addCustomer(customerDTO);
+        return ResponseEntity.status(200).body("Company added");
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity updateCustomer(@PathVariable Integer id, @Valid @RequestBody Customer customer){
-        customerService.updateCustomer(id,customer);
-        return ResponseEntity.status(200).body("Customer updated");
+    public ResponseEntity updateCustomerDTO(@Valid @RequestBody CustomerDTO customerDTO){
+        customerService.updateCustomer(customerDTO);
+        return ResponseEntity.status(200).body("Customer Updated");
     }
 
-    @DeleteMapping("/delete/{id}")
+   @DeleteMapping("/delete/{id}")
     public ResponseEntity deleteCustomer(@PathVariable Integer id){
         customerService.deleteCustomer(id);
-        return ResponseEntity.status(200).body("Customer deleted");
-    }
+       return ResponseEntity.status(200).body("Customer deleted");
+   }
 
 //    @GetMapping("/get-myorder/{id}")
 //    public ResponseEntity getMyOrderOfCustomer(@PathVariable Integer id){

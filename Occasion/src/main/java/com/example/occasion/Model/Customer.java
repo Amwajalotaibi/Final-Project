@@ -4,14 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.persistence.criteria.Order;
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Set;
 
 @Entity
-@Data
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Customer {
@@ -26,18 +25,19 @@ public class Customer {
     private String name;
 
 
-//    @NotNull(message = "Phone Number is required")
+   @NotEmpty(message = "Phone Number is required")
 //    @Positive
 //    @Column(columnDefinition ="int not null")
-    private Integer phoneNumber;
+    private String phoneNumber;
 
 
-//    @NotEmpty(message = "Email is required")
+    @NotEmpty(message = "Email is required")
+    @Email
 //    @Email(message = "Invalid Email",regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")
 //    @Column(columnDefinition = "varchar(40) unique")
-    private String email;
+    private String Email;
 
-    //@NotEmpty(message = "password can't be empty")
+    @NotEmpty(message = "password can't be empty")
 //   @Column(columnDefinition = "varchar(20) not null")
     private String password;
 
@@ -51,12 +51,7 @@ public class Customer {
     @JsonIgnore
     private Set<Myorder> myorderSet;
 
-
-
 }
-
-
-
 
 
 

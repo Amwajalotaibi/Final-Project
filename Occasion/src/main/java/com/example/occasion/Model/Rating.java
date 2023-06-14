@@ -15,13 +15,10 @@ public class Rating {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-    private Integer customer_id;
-    private Integer company_id;
-    private Integer order_id;
 
     @OneToOne
     @MapsId
     @JsonIgnore
-    private Myorder myorder;
+    private Myorder myOrder;
 
 }
