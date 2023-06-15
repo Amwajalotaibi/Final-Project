@@ -13,6 +13,8 @@ public class CompanyDTo {
     private String role;
     private String city;
     private Integer Price;
+    private String timecatgory;
+    private String rating;
 
 
 }

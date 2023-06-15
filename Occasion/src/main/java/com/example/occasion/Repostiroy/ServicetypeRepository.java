@@ -11,6 +11,7 @@ public interface ServicetypeRepository extends JpaRepository<Servicetype,Integer
     Servicetype findServicetypeById(Integer id);
 
     List<Servicetype> findServicetypeByName(String name);
+//    Servicetype findServicetypeByPrice(Integer Price);
 
 
 }

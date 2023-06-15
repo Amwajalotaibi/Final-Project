@@ -27,10 +27,10 @@ public class AuthController {
         return ResponseEntity.status(200).body("user register");
     }
 
-    @PostMapping("/admin")
-    public ResponseEntity admin(){
+    @PostMapping("/customer")
+    public ResponseEntity customer(){
 
-        return ResponseEntity.status(200).body("Welcome admin");
+        return ResponseEntity.status(200).body("Welcome customer");
     }
     @PostMapping("/login")
     public ResponseEntity login(){
@@ -45,9 +45,9 @@ public class AuthController {
     }
 
 
-    @PostMapping("/user")
-    public ResponseEntity user (){
+    @PostMapping("/Company")
+    public ResponseEntity company (){
 
-        return ResponseEntity.status(200).body("Welcome user");
+        return ResponseEntity.status(200).body("Welcome Company");
     }
 }

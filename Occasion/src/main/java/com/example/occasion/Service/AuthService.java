@@ -1,5 +1,7 @@
 package com.example.occasion.Service;
 
+import com.example.occasion.Model.Company;
+import com.example.occasion.Model.Customer;
 import com.example.occasion.Model.MyUser;
 import com.example.occasion.Repostiroy.AuthRepository;
 import lombok.AllArgsConstructor;
@@ -20,7 +22,10 @@ public class AuthService {
     public void register(MyUser myUser){
         String hash=new BCryptPasswordEncoder().encode(myUser.getPassword());
         myUser.setPassword(hash);
-        myUser.setRole("USER");
+        myUser.setRole("CUSTOMER");
+        myUser.setRole("COMPANY");
+
+//        myUser.setUsername(myUser.getUsername());
         authRepository.save(myUser);
     }
 }

@@ -15,7 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @RequiredArgsConstructor
 public class SpringConfiguration {
 
-    private final MyUserDetailsService myUserDetailsService;
+ private final MyUserDetailsService myUserDetailsService;
     @Bean
     public DaoAuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider authenticationProvider=new DaoAuthenticationProvider();
@@ -32,10 +32,10 @@ public class SpringConfiguration {
                 .authenticationProvider(authenticationProvider())
                 .authorizeHttpRequests()
                 .requestMatchers("/api/v1/auth/register").permitAll()
-                .requestMatchers("/api/v1/auth/admin").hasAuthority("ADMIN")
-                .requestMatchers("/api/v1/auth/user").hasAuthority("USER")
-                .requestMatchers("/api/v1/auth/login").hasAuthority("USER")
-                .anyRequest().authenticated()
+                .requestMatchers("/api/v1/auth/company").hasAuthority("COMPANY")
+                .requestMatchers("/api/v1/auth/customer").hasAuthority("CUSTOMER")
+                .requestMatchers("/api/v1/auth/login").hasAuthority("CUSTOMER")
+//                .anyRequest().authenticated()
                 .and()
                 .logout().logoutUrl("/api/v1/auth/logout")
                 .deleteCookies("JSESSIONID")

@@ -2,9 +2,7 @@ package com.example.occasion.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,9 +26,14 @@ public class Servicetype {
     @Column(columnDefinition = "varchar(20)not null")
     private String details;
 
-    @NotNull
+    @NotNull(message = "price can't be Null")
+    @Min(3)
+    @Max(50)
     @Column(columnDefinition = "int not null")
     private Integer price;
+
+
+
 
     @OneToOne
     @MapsId

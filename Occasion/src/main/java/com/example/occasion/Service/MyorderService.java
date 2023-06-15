@@ -1,8 +1,10 @@
 package com.example.occasion.Service;
 
 import com.example.occasion.ApiException.ApiException;
+import com.example.occasion.Model.Company;
 import com.example.occasion.Model.Customer;
 import com.example.occasion.Model.Myorder;
+import com.example.occasion.Repostiroy.CompanyRepository;
 import com.example.occasion.Repostiroy.CustomerRepository;
 import com.example.occasion.Repostiroy.MyorderRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +16,8 @@ import java.util.List;
 public class MyorderService {
 
     private final MyorderRepository myorderRepository;
-    private final CustomerRepository customerRepository;
+//    private final CustomerRepository customerRepository;
+//    private final CompanyRepository companyRepository;
 
 
     public List<Myorder> getAll() {
@@ -34,9 +37,11 @@ public class MyorderService {
         if (oldMyorder == null) {
             throw new ApiException("Order not found");
         }
-
-        oldMyorder.setTotalPrice(myorder.getTotalPrice());
-
+        oldMyorder.setDay(myorder.getDay());
+        oldMyorder.setDate(myorder.getDate());
+        oldMyorder.setTime(myorder.getTime());
+        //oldMyorder.setTotalPrice(myorder.getTotalPrice());
+//        oldMyorder.getServicetypePrice(myorder.getServicetypePrice());
         myorderRepository.save(oldMyorder);
     }
 
@@ -60,6 +65,10 @@ public class MyorderService {
     public List<Myorder> getOrderByDay(Integer day) {
         return myorderRepository.findMyorderByDay(day);
 
+    }
+
+    public Myorder getMyorderStatus(Integer myorderId) {
+        return myorderRepository.findById(myorderId).orElse(null);
     }
 
 }

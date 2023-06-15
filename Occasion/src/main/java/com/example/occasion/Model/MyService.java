@@ -14,6 +14,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MyService {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -24,6 +25,9 @@ public class MyService {
     @Pattern(regexp = "\\b(?:bigparty|mediumparty|smallparty)\\b",message = "Category Not Valid")
     @Column(columnDefinition = "varchar(20) not null check (category='bigparty' or category='mediumparty' or category='smallparty')")
     private String category;
+
+
+
 
 
     @ManyToOne

@@ -42,13 +42,4 @@ public class MyServiceController {
         return ResponseEntity.status(200).body("get by name");
     }
 
-
-//    @PutMapping("/loyalty/{id}")
-//    public ResponseEntity loyalty(@PathVariable Integer id){
-//        customerService.loyalty(id);
-//        return ResponseEntity.status(200).body("Customer got the loyalty discount");
-//    }
-
-
-
 }

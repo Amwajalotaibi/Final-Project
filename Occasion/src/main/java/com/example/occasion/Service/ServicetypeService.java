@@ -23,6 +23,7 @@ public class ServicetypeService {
     private final MyServiceRepository myServiceRepository;
 
     public List<Servicetype>getAll() {
+
         return servicetypeRepository.findAll();
     }
 
@@ -87,10 +88,6 @@ public class ServicetypeService {
             servicetypeRepository.save(s);
         }
     }
-
-
-
-
 
 }
 

@@ -17,6 +17,7 @@ import java.util.Collections;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MyUser implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -26,12 +27,16 @@ public class MyUser implements UserDetails {
     private  String username;
 
    @NotEmpty(message = "password not Empty")
-   @Column(columnDefinition = "varchar(10) not null")
+   @Column(columnDefinition = "varchar(200) not null")
     private String password;
 
     @NotEmpty(message = "role can't be empty")
     @Column(columnDefinition = "varchar(20) not null check(role ='customer' or role='company')")
     private String role;
+
+
+
+
 
     @OneToOne(cascade =CascadeType.ALL,mappedBy = "myUser")
     @PrimaryKeyJoinColumn

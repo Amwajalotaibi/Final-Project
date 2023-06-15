@@ -2,10 +2,10 @@ package com.example.occasion.Service;
 
 import com.example.occasion.ApiException.ApiException;
 import com.example.occasion.DTO.CompanyDTo;
-import com.example.occasion.Model.Company;
-import com.example.occasion.Model.MyUser;
+import com.example.occasion.Model.*;
 import com.example.occasion.Repostiroy.AuthRepository;
 import com.example.occasion.Repostiroy.CompanyRepository;
+import com.example.occasion.Repostiroy.RatingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +25,8 @@ public class CompanyService {
         if (myUser == null) {
             throw new ApiException("sorry can't add");
         }
-        Company company = new Company(null, dTo.getUsername(), dTo.getPassword(), dTo.getCity(), dTo.getRole(), dTo.getPrice(), null, null, null);
+
+        Company company = new Company(null, dTo.getUsername(), dTo.getPassword(), dTo.getRole(), dTo.getCity(), dTo.getTimecatgory(), dTo.getRating(), dTo.getPrice(),null,null,null);
         companyRepository.save(company);
     }
 
@@ -50,4 +51,30 @@ public class CompanyService {
             throw new ApiException("Company not found");
         companyRepository.delete(company);
     }
+
+    public Company getCompanyByCity(String city) {
+        Company company = companyRepository.findCompanyByCity(city);
+        if (company == null) {
+            throw new ApiException(" not found");
+        }
+        return company;
+    }
+    public Company getCompanybytimecatgory(String timecatgory) {
+        Company company1 =companyRepository.findCompanyByTimecatgory(timecatgory);
+        if (company1 == null) {
+            throw new ArithmeticException(" not found ");
+        }
+        return company1;
+    }
+
+
+    public Company findCompanyByRating(String rating) {
+        Company company = companyRepository.findCompanyByRating(rating);
+        if (company == null)
+            throw new ApiException("Not found");
+        companyRepository.save(company);
+       return company;
+    }
+
+
 }

@@ -1,7 +1,8 @@
 package com.example.occasion.Controller;
 
+import com.example.occasion.Model.Company;
 import com.example.occasion.Model.Customer;
-import com.example.occasion.Model.MyUser;
+//import com.example.occasion.Model.MyUser;
 import com.example.occasion.Model.Myorder;
 import com.example.occasion.Service.MyorderService;
 import jakarta.validation.Valid;
@@ -9,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -51,6 +54,16 @@ public class MyorderController {
     @GetMapping("/get-day/{day}")
     public ResponseEntity getMyOrderByDay(@PathVariable Integer day) {
         return ResponseEntity.status(200).body("order by day is :" + myorderService.getOrderByDay(day));
+    }
+
+    @GetMapping("/{orderId}")
+    public ResponseEntity getMyorderStatus(@PathVariable Integer myorderId) {
+        Myorder myorder=myorderService.getMyorderStatus(myorderId);
+        if (myorder != null) {
+            return ResponseEntity.ok(myorder);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 }

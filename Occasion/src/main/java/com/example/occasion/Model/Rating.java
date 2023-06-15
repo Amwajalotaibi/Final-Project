@@ -16,6 +16,9 @@ public class Rating {
     private Integer id;
     private String name;
 
+
+
+
     @OneToOne
     @MapsId
     @JsonIgnore

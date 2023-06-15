@@ -1,5 +1,6 @@
 package com.example.occasion.Repostiroy;
 
+import com.example.occasion.Model.Company;
 import com.example.occasion.Model.Customer;
 import com.example.occasion.Model.MyUser;
 import com.example.occasion.Model.Myorder;

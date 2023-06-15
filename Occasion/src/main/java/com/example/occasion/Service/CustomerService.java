@@ -6,10 +6,7 @@ import com.example.occasion.Model.Company;
 import com.example.occasion.Model.Customer;
 import com.example.occasion.Model.MyUser;
 import com.example.occasion.Model.Myorder;
-import com.example.occasion.Repostiroy.AuthRepository;
-import com.example.occasion.Repostiroy.CustomerRepository;
-import com.example.occasion.Repostiroy.MyServiceRepository;
-import com.example.occasion.Repostiroy.ServicetypeRepository;
+import com.example.occasion.Repostiroy.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,27 +18,30 @@ import java.util.Set;
 public class CustomerService {
     private final CustomerRepository customerRepository;
     private final AuthRepository authRepository;
+    private final MyorderRepository myorderRepository;
 
-    public List<Customer> getAll(){
+
+    public List<Customer> getAll() {
         return customerRepository.findAll();
     }
-    public void addCustomer(CustomerDTO dto){
-        MyUser myUser=authRepository.findMyUserById(dto.getCustomer_id());
-        if(myUser==null){
+
+    public void addCustomer(CustomerDTO dto) {
+        MyUser myUser = authRepository.findMyUserById(dto.getCustomer_id());
+        if (myUser == null) {
             throw new ApiException("sorry can't add");
         }
-        Customer customer=new Customer(null, dto.getName(), dto.getEmail(), dto.getPassword(), dto.getPhoneNumber(),false,0,null,null);
+        Customer customer = new Customer(null, dto.getName(), dto.getEmail(), dto.getPassword(), dto.getPhoneNumber(), false, 0,null,null);
         customerRepository.save(customer);
     }
 
 
-    public void updateCustomer(CustomerDTO dto){
-        MyUser myUser=authRepository.findMyUserById(dto.getCustomer_id());
-        if(myUser==null){
+    public void updateCustomer(CustomerDTO dto) {
+        MyUser myUser = authRepository.findMyUserById(dto.getCustomer_id());
+        if (myUser == null) {
             throw new ApiException("MyUser not found");
         }
 
-        Customer customer=customerRepository.getCustomerById(dto.getCustomer_id());
+        Customer customer = customerRepository.getCustomerById(dto.getCustomer_id());
         customer.setName(dto.getName());
         customer.setEmail(dto.getEmail());
         customer.setPhoneNumber(dto.getPhoneNumber());
@@ -49,7 +49,7 @@ public class CustomerService {
         customerRepository.save(customer);
     }
 
-    public void deleteCustomer(Integer id){
+    public void deleteCustomer(Integer id) {
         Customer c = customerRepository.getCustomerById(id);
         if (c == null)
             throw new ApiException("Not found");
@@ -62,20 +62,24 @@ public class CustomerService {
         if (customer == null) {
             throw new ArithmeticException("Not found");
         }
-        return customer.getMyorderSet();
+            return customer.getMyorderSet();
+
     }
 
-//  public void loyalty(Integer id){
-//       Customer customer = customerRepository.getCustomerById(id);
-//       if (customer == null)
-//            throw new ApiException("Not found");
-//        Integer price = customer.getMyorderSet().getServicetypePrice;
-//        if (customer.getNumberOfVisit() > 2) {
-//            customer.setLoyalty(true);
-//            customer.getMyorderSet().setServicetypePeice(price - (price * 20 / 100));
-//            customerRepository.save(customer);
-//        }
-//        else
-//            throw new ApiException("Not enough visits");
-//    }
-}
+        public void loyalty (Integer customerId, Integer myOrderId){
+            Customer customer = customerRepository.getCustomerById(customerId);
+            Myorder myorder = myorderRepository.findMyorderById(myOrderId);
+            if (customer == null || myorder == null || myorder.getCustomer() != customer)
+                throw new ApiException("Not found");
+            Integer price = myorder.getTotalPrice();
+            if (customer.getNumberOfVisit() > 2) {
+                customer.setLoyalty(true);
+                myorder.setTotalPrice(price - (price * 20 / 100));
+                customerRepository.save(customer);
+                myorderRepository.save(myorder);
+            } else
+                throw new ApiException("Not enough visits");
+        }
+
+    }
+

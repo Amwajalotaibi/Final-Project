@@ -32,18 +32,18 @@ public class Customer {
 
 
     @NotEmpty(message = "Email is required")
-    @Email
-//    @Email(message = "Invalid Email",regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")
+    @Email(message = "Invalid Email",regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")
 //    @Column(columnDefinition = "varchar(40) unique")
     private String Email;
 
     @NotEmpty(message = "password can't be empty")
-//   @Column(columnDefinition = "varchar(20) not null")
+   @Column(columnDefinition = "varchar(300) not null")
     private String password;
 
     private boolean loyalty = false;
 
     private Integer numberOfVisit=0;
+
 
 
     @OneToOne
@@ -57,9 +57,3 @@ public class Customer {
     private Set<Myorder> myorderSet;
 
 }
-
-
-
-//    private boolean loyalty = false;
-//
-//    private Integer numberOfVisit=0;

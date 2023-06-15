@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -32,6 +34,13 @@ public class Myorder {
     @NotNull(message = "total price not null")
     @Column(columnDefinition = "int not null")
     private Integer totalPrice;
+
+    private String stutas;
+
+    private LocalDateTime createAt;
+
+
+
 
 
 
