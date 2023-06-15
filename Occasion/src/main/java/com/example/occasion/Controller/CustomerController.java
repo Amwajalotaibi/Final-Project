@@ -40,10 +40,10 @@ public class CustomerController {
        return ResponseEntity.status(200).body("Customer deleted");
    }
 
-//    @GetMapping("/get-myorder/{id}")
-//    public ResponseEntity getMyOrderOfCustomer(@PathVariable Integer id){
-//        return ResponseEntity.status(200).body(customerService.getMyOrderOfCustomer(id));
-//    }
+    @GetMapping("/get-myorder/{id}")
+    public ResponseEntity getMyOrderOfCustomer(@PathVariable Integer id){
+        return ResponseEntity.status(200).body(customerService.getMyOrderofCustomer(id));
+    }
 
 //    @PutMapping("/loyalty/{id}")
 //    public ResponseEntity loyalty(@PathVariable Integer id){

@@ -41,6 +41,11 @@ public class Customer {
 //   @Column(columnDefinition = "varchar(20) not null")
     private String password;
 
+    private boolean loyalty = false;
+
+    private Integer numberOfVisit=0;
+
+
     @OneToOne
     @MapsId
     @JsonIgnore

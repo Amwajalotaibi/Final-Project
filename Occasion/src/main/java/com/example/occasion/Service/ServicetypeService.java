@@ -54,5 +54,43 @@ public class ServicetypeService {
             throw new ApiException("Company not found");
         servicetypeRepository.delete(servicetype);
     }
+
+
+    public List<Servicetype> getServicetypeByName(String name){
+        List<Servicetype> servicetypeList=servicetypeRepository.findServicetypeByName(name);
+        if(servicetypeList.size() == 0 ){
+            throw new ArithmeticException("Service Type not found");
+        }
+        return servicetypeList;
+    }
+
+    public String getDetailsByServicetype(Integer servicetype_id){
+        Servicetype servicetype=servicetypeRepository.findServicetypeById(servicetype_id);
+        if(servicetype==null){
+            throw new ArithmeticException("Service Type not found");
+        }
+        return servicetype.getDetails();
+    }
+
+    public Integer getPriceByServicetype(Integer servicetype_id){
+        Servicetype servicetype=servicetypeRepository.findServicetypeById(servicetype_id);
+        if (servicetype==null) {
+            throw new ApiException("id wrong,Service Type not found");
+        }
+        return servicetype.getPrice();
+    }
+
+    public void discount(Integer amount){
+        List<Servicetype> servicetypeList=servicetypeRepository.findAll();
+        for ( Servicetype s :servicetypeList){
+            s.setPrice(s.getPrice()-(s.getPrice()*amount/100));
+            servicetypeRepository.save(s);
+        }
+    }
+
+
+
+
+
 }
 

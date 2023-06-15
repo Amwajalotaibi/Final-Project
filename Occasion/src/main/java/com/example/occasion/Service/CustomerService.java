@@ -8,10 +8,13 @@ import com.example.occasion.Model.MyUser;
 import com.example.occasion.Model.Myorder;
 import com.example.occasion.Repostiroy.AuthRepository;
 import com.example.occasion.Repostiroy.CustomerRepository;
+import com.example.occasion.Repostiroy.MyServiceRepository;
+import com.example.occasion.Repostiroy.ServicetypeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -27,7 +30,7 @@ public class CustomerService {
         if(myUser==null){
             throw new ApiException("sorry can't add");
         }
-        Customer customer=new Customer(null, dto.getName(), dto.getEmail(), dto.getPassword(), dto.getPhoneNumber(),null,null);
+        Customer customer=new Customer(null, dto.getName(), dto.getEmail(), dto.getPassword(), dto.getPhoneNumber(),false,0,null,null);
         customerRepository.save(customer);
     }
 
@@ -54,30 +57,22 @@ public class CustomerService {
     }
 
 
+    public Set<Myorder> getMyOrderofCustomer(Integer id) {
+        Customer customer = customerRepository.getCustomerById(id);
+        if (customer == null) {
+            throw new ArithmeticException("Not found");
+        }
+        return customer.getMyorderSet();
+    }
 
-
-
-
-
-
-
-
-
-//    public Myorder getMyOrderOfCustomer(Integer id){
-//        Customer customer = customerRepository.getCustomerById(id);
-//        if (customer == null)
+//  public void loyalty(Integer id){
+//       Customer customer = customerRepository.getCustomerById(id);
+//       if (customer == null)
 //            throw new ApiException("Not found");
-//        return customer.getMyorder();
-//    }
-
-//    public void loyalty(Integer id){// عرض هذا لو صار انت مسوي عندنا حجزاكثر من مرتين يصير لك خصم٢٠
-//        Customer customer = customerRepository.getCustomerById(id);
-//        if (customer == null)
-//            throw new ApiException("Not found");
-//        Integer price = customer.getMyorder().getCmpanyPrice();
+//        Integer price = customer.getMyorderSet().getServicetypePrice;
 //        if (customer.getNumberOfVisit() > 2) {
 //            customer.setLoyalty(true);
-//            customer.getMyorder().setCompanyPrice(price - (price * 20 / 100));
+//            customer.getMyorderSet().setServicetypePeice(price - (price * 20 / 100));
 //            customerRepository.save(customer);
 //        }
 //        else

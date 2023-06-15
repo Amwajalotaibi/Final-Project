@@ -43,54 +43,14 @@ public class MyorderController {
     }
 
     @GetMapping("/get-id/{id}")
-    public ResponseEntity getMyOrder(@PathVariable Integer id) {
-        Myorder myorder = myorderService.findMyorderById(id);
+    public ResponseEntity getMyOrderById(@PathVariable Integer id) {
+        myorderService.findMyorderById(id);
         return ResponseEntity.status(200).body("Get by Id");
     }
 
-    @GetMapping("/get/{order}/{day}")
-    public ResponseEntity getOrderByDay(@AuthenticationPrincipal  Myorder myorder){
-        myorderService.getOrderByDay(myorder.getDay());
-       return ResponseEntity.status(200).body("order by day");
-}
-//    @GetMapping("/get/{order}/{customer}")
-//    public ResponseEntity getOrderByCustomer(@AuthenticationPrincipal Myorder myorder){
-//        myorderService.getOrderByCustomer(myorder.getCustomer());
-//        return ResponseEntity.status(200).body("order by customer");
-//    }
+    @GetMapping("/get-day/{day}")
+    public ResponseEntity getMyOrderByDay(@PathVariable Integer day) {
+        return ResponseEntity.status(200).body("order by day is :" + myorderService.getOrderByDay(day));
+    }
 
-
-
-
-
-
-
-
-
-//    @DeleteMapping("/delete/{myorderId}")
-//    public ResponseEntity deletemyorder(@AuthenticationPrincipal MyUser myUser,@PathVariable Integer myorderId){
-//        myorderService.deleteMyorder(myUser,myorderId);
-//
-//        return ResponseEntity.status(200).body(" My order delete");
-//    }
-//
-//
-//    @GetMapping("/get-id/{id}")
-//    public ResponseEntity getMyorderById(@PathVariable Integer id){
-//        return ResponseEntity.status(200).body("get My Order By Id"+myorderService.getMyorderById(id));
-//    }
-//
-//
-
-    //    @PostMapping("/add")
-//    public ResponseEntity addMyorder(@AuthenticationPrincipal MyUser myUser, @RequestBody Myorder myorder, @RequestBody Integer productId , @RequestBody Integer userId){
-//        myorderService.addMyorder(productId, userId, myorder);
-//        return ResponseEntity.status(200).body("My Order Added");
-//    }
-
-//    @GetMapping("/get")
-//    public ResponseEntity getMyorder(@AuthenticationPrincipal MyUser myUser) {
-//        List<Myorder> myorderList=myorderService.getAllMyorder(myUser);
-//        return ResponseEntity.status(200).body(myorderList);
-//    }
 }

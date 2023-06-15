@@ -10,8 +10,6 @@ import java.util.List;
 @Repository
 public interface MyorderRepository extends JpaRepository<Myorder,Integer> {
     Myorder findMyorderById(Integer id);
-    Myorder findMyorderByDay(String day);
-    Myorder findMyorderByCustomer(Customer customer);
+    List<Myorder> findMyorderByDay(Integer day);
 
-//    List<Myorder> findMyorderByMyUser(MyUser myUser);
 }

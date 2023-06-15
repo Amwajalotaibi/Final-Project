@@ -36,18 +36,12 @@ public class MyServiceController {
             return ResponseEntity.status(200).body("My Service deleted");
         }
 
+    @GetMapping("/get-category/{category}")
+    public ResponseEntity getMyServiceByCategory(@PathVariable String category){
+            myServiceService.getMyserviceBycategory(category);
+        return ResponseEntity.status(200).body("get by name");
+    }
 
-
-
-
-
-
-
-
-//    @GetMapping("/get-myorder/{id}")
-//    public ResponseEntity getMyOrderOfCustomer(@PathVariable Integer id){
-//        return ResponseEntity.status(200).body(customerService.getMyOrderOfCustomer(id));
-//    }
 
 //    @PutMapping("/loyalty/{id}")
 //    public ResponseEntity loyalty(@PathVariable Integer id){

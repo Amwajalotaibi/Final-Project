@@ -22,7 +22,7 @@ public class RatingService {
     }
 
     public void addRating(RatingDTO dto) {
-        Myorder myorder = myorderRepository.findMyorderById(dto.getId());
+        Myorder myorder = myorderRepository.findMyorderById(dto.getRating_id());
         if (myorder == null) {
             throw new ApiException("sorry can't add");
         }
@@ -32,12 +32,12 @@ public class RatingService {
 
 
     public void updateRating(RatingDTO dto) {
-        Myorder myorder = myorderRepository.findMyorderById(dto.getId());
+        Myorder myorder = myorderRepository.findMyorderById(dto.getRating_id());
         if (myorder == null) {
             throw new ApiException("MyOrder not found");
         }
 
-        Rating rating = ratingRepository.getReferenceById(dto.getId());
+        Rating rating = ratingRepository.getReferenceById(dto.getRating_id());
         rating.setName(dto.getName());
     }
 
