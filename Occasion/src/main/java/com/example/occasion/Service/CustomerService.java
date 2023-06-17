@@ -1,6 +1,7 @@
 package com.example.occasion.Service;
 
 import com.example.occasion.ApiException.ApiException;
+import com.example.occasion.DTO.CompanyDTo;
 import com.example.occasion.DTO.CustomerDTO;
 import com.example.occasion.Model.Company;
 import com.example.occasion.Model.Customer;
@@ -8,6 +9,7 @@ import com.example.occasion.Model.MyUser;
 import com.example.occasion.Model.Myorder;
 import com.example.occasion.Repostiroy.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,32 +24,33 @@ public class CustomerService {
 
 
     public List<Customer> getAll() {
+
         return customerRepository.findAll();
     }
 
     public void addCustomer(CustomerDTO dto) {
-        MyUser myUser = authRepository.findMyUserById(dto.getCustomer_id());
-        if (myUser == null) {
-            throw new ApiException("sorry can't add");
-        }
-        Customer customer = new Customer(null, dto.getName(), dto.getEmail(), dto.getPassword(), dto.getPhoneNumber(), false, 0,null,null);
+        MyUser myUser=new MyUser(null, dto.getUsername(), dto.getPassword(),"customer",null,null);
+//        String hash=new BCryptPasswordEncoder().encode(myUser.getPassword());
+//        myUser.setPassword(hash);
+        authRepository.save(myUser);
+
+
+        Customer customer = new Customer(null, dto.getEmail(), dto.getPhoneNumber(), false, 0,null,null);
         customerRepository.save(customer);
     }
 
 
-    public void updateCustomer(CustomerDTO dto) {
-        MyUser myUser = authRepository.findMyUserById(dto.getCustomer_id());
-        if (myUser == null) {
-            throw new ApiException("MyUser not found");
-        }
-
-        Customer customer = customerRepository.getCustomerById(dto.getCustomer_id());
-        customer.setName(dto.getName());
-        customer.setEmail(dto.getEmail());
-        customer.setPhoneNumber(dto.getPhoneNumber());
-        customer.setPassword(dto.getPassword());
-        customerRepository.save(customer);
-    }
+//    public void updateCustomer(CustomerDTO dto) {
+//        MyUser myUser = authRepository.findMyUserById(dto.);
+//        if (myUser == null) {
+//            throw new ApiException("MyUser not found");
+//        }
+//
+//        Customer customer = customerRepository.getCustomerById(dto.getCustomer_id());
+//        customer.setEmail(dto.getEmail());
+//        customer.setPhoneNumber(dto.getPhoneNumber());
+//        customerRepository.save(customer);
+//    }
 
     public void deleteCustomer(Integer id) {
         Customer c = customerRepository.getCustomerById(id);

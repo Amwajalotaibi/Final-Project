@@ -19,26 +19,16 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-//    @NotEmpty(message = "Name is required")
-//    @Size(min = 2)
-//    @Column(columnDefinition = "varchar(20)")
-    private String name;
-
-
    @NotEmpty(message = "Phone Number is required")
 //    @Positive
 //    @Column(columnDefinition ="int not null")
     private String phoneNumber;
-
 
     @NotEmpty(message = "Email is required")
     @Email(message = "Invalid Email",regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")
 //    @Column(columnDefinition = "varchar(40) unique")
     private String Email;
 
-    @NotEmpty(message = "password can't be empty")
-   @Column(columnDefinition = "varchar(300) not null")
-    private String password;
 
     private boolean loyalty = false;
 

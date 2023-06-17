@@ -7,6 +7,8 @@ import com.example.occasion.Repostiroy.AuthRepository;
 import com.example.occasion.Repostiroy.CompanyRepository;
 import com.example.occasion.Repostiroy.RatingRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,31 +21,34 @@ public class CompanyService {
     public List<Company> getAllCompany() {
         return companyRepository.findAll();
     }
+//    public List<Company> getCompany( Integer userId) {
+//        MyUser myUser=authRepository.findMyUserById(userId);
+//        return companyRepository.findAllByMyUser(myUser);
+//    }
 
     public void addCompany(CompanyDTo dTo) {
-        MyUser myUser = authRepository.findMyUserById(dTo.getCompany_id());
-        if (myUser == null) {
-            throw new ApiException("sorry can't add");
-        }
+        MyUser myUser=new MyUser(null, dTo.getUsername(), dTo.getPassword(),"company",null,null);
+//        String hash=new BCryptPasswordEncoder().encode(myUser.getPassword());
+//        myUser.setPassword(hash);
+        authRepository.save(myUser);
 
-        Company company = new Company(null, dTo.getUsername(), dTo.getPassword(), dTo.getRole(), dTo.getCity(), dTo.getTimecatgory(), dTo.getRating(), dTo.getPrice(),null,null,null);
+        Company company = new Company(null,dTo.getLicensenumber(),dTo.getCity(), dTo.getTimecatgory(), dTo.getRating(), dTo.getPrice(),myUser,null,null);
         companyRepository.save(company);
     }
 
-    public void updateCompany(CompanyDTo dTo) {
-        MyUser myUser = authRepository.findMyUserById(dTo.getCompany_id());
-        if (myUser == null) {
-            throw new ApiException("MyUser not found");
-        }
-
-        Company company = companyRepository.findCompanyById(dTo.getCompany_id());
-        company.setUsername(dTo.getUsername());
-        company.setCity(dTo.getCity());
-        company.setPrice(dTo.getPrice());
-        company.setRole(dTo.getRole());
-        company.setPassword(dTo.getPassword());
-        companyRepository.save(company);
-    }
+//    public void updateCompany(CompanyDTo dTo) {
+//        MyUser myUser = authRepository.findMyUserById(dTo.getId());
+//        if (myUser == null) {
+//            throw new ApiException("Company not found");
+//        }
+//
+//        Company company = companyRepository.findCompanyById(myUser.getId());
+//        company.setCity(dTo.getCity());
+//        company.setPrice(dTo.getPrice());
+//        company.setTimecatgory(dTo.getTimecatgory());
+//       company.setLicensenumber(dTo.getLicensenumber());
+//        companyRepository.save(company);
+//    }
 
     public void deleteCompany(Integer id){
         Company company=companyRepository.findCompanyById(id);
@@ -75,6 +80,22 @@ public class CompanyService {
         companyRepository.save(company);
        return company;
     }
+
+//    public void updateCompany(Integer id , Company newCompany , Integer auth){
+//        Company oldCompany=companyRepository.findCompanyById(id);
+//        MyUser myUser=authRepository.findMyUserById(auth);
+//
+//        if (oldCompany==null){
+//            throw new ApiException("Todo not found");
+//        }else if(oldCompany.getMyUser().getId()!=auth){
+//            throw new ApiException("Sorry , You do not have the authority to update this Company!");
+//        }
+//
+//        newCompany.setId(id);
+//        newCompany.setMyUser(myUser);
+//
+//        companyRepository.save(newCompany);
+//    }
 
 
 }

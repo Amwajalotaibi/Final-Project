@@ -20,7 +20,7 @@ public class Myorder {
     private Integer id;
 
     @NotNull(message = "day not null")
-    @Column(columnDefinition = "varchar(20) not null")
+    @Column(columnDefinition = "int not null")
     private Integer day;
 
     @NotEmpty(message = "date can't be empty")

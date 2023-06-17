@@ -56,7 +56,7 @@ public class MyorderController {
         return ResponseEntity.status(200).body("order by day is :" + myorderService.getOrderByDay(day));
     }
 
-    @GetMapping("/{orderId}")
+    @GetMapping("/get-status/{myorderId}")
     public ResponseEntity getMyorderStatus(@PathVariable Integer myorderId) {
         Myorder myorder=myorderService.getMyorderStatus(myorderId);
         if (myorder != null) {

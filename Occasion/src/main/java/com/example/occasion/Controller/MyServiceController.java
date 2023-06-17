@@ -38,8 +38,7 @@ public class MyServiceController {
 
     @GetMapping("/get-category/{category}")
     public ResponseEntity getMyServiceByCategory(@PathVariable String category){
-            myServiceService.getMyserviceBycategory(category);
-        return ResponseEntity.status(200).body("get by name");
+        return ResponseEntity.status(200).body("My Service is:"+ myServiceService.getMyserviceBycategory(category));
     }
 
 }

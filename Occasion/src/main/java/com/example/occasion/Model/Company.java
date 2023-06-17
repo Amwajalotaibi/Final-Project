@@ -13,8 +13,6 @@ import java.util.Set;
 
 @Entity
 @Data
-@Setter
-@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Company {
@@ -23,30 +21,21 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-//    @NotEmpty(message = "username can't be empty")
-//    @Column(columnDefinition = "varchar(20) not null")
-    private String username;
-//
-//    @NotEmpty(message = "password can't be empty")
-//    @Column(columnDefinition = "varchar(20) not null")
-    private String password;
-
 //    @NotEmpty(message = "Role can't be empty")
-//    @Column(columnDefinition = "varchar(20) not null check(role ='licensenumber')")
-    private String role;
+//   @Column(columnDefinition = "varchar(20) not null check(role ='licensenumber')")
+    private String licensenumber;
 //
 //    @NotEmpty(message = "city can't be empty")
 //    @Column(columnDefinition = "varchar(20) not null")
     private String city;
 
-//    @NotEmpty(message = "role can't be empty")
-//    @Column(columnDefinition = "varchar(20) not null check(role ='available' or role='busy')")
+//    @NotEmpty(message = "time catgory can't be empty")
+//    @Column(columnDefinition = "varchar(20) not null check(timecatgory ='available' or timecatgory='busy')")
     private String timecatgory;
 
-//    @NotEmpty(message = "city can't be empty")
+//    @NotEmpty(message = "rating can't be empty")
 //    @Column(columnDefinition = "varchar(20) not null")
     private String rating;
-
 
 //    @NotNull(message = "price can't be Null")
 //    @Min(3)

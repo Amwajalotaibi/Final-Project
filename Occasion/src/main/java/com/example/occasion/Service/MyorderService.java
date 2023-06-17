@@ -68,7 +68,8 @@ public class MyorderService {
     }
 
     public Myorder getMyorderStatus(Integer myorderId) {
-        return myorderRepository.findById(myorderId).orElse(null);
+
+        return myorderRepository.findMyorderById(myorderId);
     }
 
 }

@@ -28,7 +28,7 @@ public class Servicetype {
 
     @NotNull(message = "price can't be Null")
     @Min(3)
-    @Max(50)
+    @Max(1000)
     @Column(columnDefinition = "int not null")
     private Integer price;
 
